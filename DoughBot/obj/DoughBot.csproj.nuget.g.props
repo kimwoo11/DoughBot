@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\steve\.nuget\packages\</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.10.0</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="C:\Users\steve\.nuget\packages\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <None Include="$(NuGetPackageRoot)quantconnect.ibautomater\2.0.52\contentFiles\any\any\IBAutomater.jar" Condition="Exists('$(NuGetPackageRoot)quantconnect.ibautomater\2.0.52\contentFiles\any\any\IBAutomater.jar')">
+      <NuGetPackageId>QuantConnect.IBAutomater</NuGetPackageId>
+      <NuGetPackageVersion>2.0.52</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>IBAutomater.jar</TargetPath>
+      <Private>True</Private>
+      <Link>IBAutomater.jar</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)quantconnect.ibautomater\2.0.52\contentFiles\any\any\IBAutomater.sh" Condition="Exists('$(NuGetPackageRoot)quantconnect.ibautomater\2.0.52\contentFiles\any\any\IBAutomater.sh')">
+      <NuGetPackageId>QuantConnect.IBAutomater</NuGetPackageId>
+      <NuGetPackageVersion>2.0.52</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>IBAutomater.sh</TargetPath>
+      <Private>True</Private>
+      <Link>IBAutomater.sh</Link>
+    </None>
+  </ItemGroup>
+</Project>

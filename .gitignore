@@ -1,0 +1,6 @@
+data/
+.vs/
+bin/
+backtestResults*
+*.csv
+*.txt
