@@ -4,3 +4,5 @@ bin/
 backtestResults*
 *.csv
 *.txt
+Properties/*
+obj/
