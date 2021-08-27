@@ -82,7 +82,7 @@ namespace DoughBot
             var strategy = security.Strategy;
             var signal = strategy.GetSignal(security);
 
-            if (ZoneAnalysis.GetZone(currentDateTime) == MarketZones.TradingOpen)
+            if (ZoneAnalysis.GetZone(time) == MarketZones.TradingOpen)
             {
 
                 if (signal != SignalType.None)
@@ -99,7 +99,7 @@ namespace DoughBot
                     }
                 }
             }
-            else if (ZoneAnalysis.GetZone(currentDateTime) == MarketZones.TradingClose)
+            else if (ZoneAnalysis.GetZone(time) == MarketZones.TradingClose)
             {
                 if (security.CurrentSignal == SignalType.BuyCall || security.CurrentSignal == SignalType.BuyPut)
                 {
@@ -111,7 +111,7 @@ namespace DoughBot
                     }
                 }
             }
-            else if (ZoneAnalysis.GetZone(currentDateTime) == MarketZones.MarketClose)
+            else if (ZoneAnalysis.GetZone(time) == MarketZones.MarketClose)
             {
                 if (security.CurrentSignal == SignalType.BuyCall || security.CurrentSignal == SignalType.BuyPut)
                 {
