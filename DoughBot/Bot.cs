@@ -23,7 +23,7 @@ namespace DoughBot
         public IBWrapper IbWrapper;
         private EClientSocket ibClient;
         private Dictionary<string, Strategy> watchDictionary;
-        private long currentTimestamp;
+        private DateTime currentDateTime;
         private bool isBacktest = false;
 
         public int Id;
@@ -44,6 +44,7 @@ namespace DoughBot
         public void Run()
         {
             InitializeTwsConnection();
+            SendText("Turning on bot!");
             InitializeDataDictionary();
             RequestDataAndRunLive();
         }
@@ -72,8 +73,7 @@ namespace DoughBot
                 return;
             }
 
-            currentTimestamp = time;
-            var currentDateTime = ConvertUtcTimeStampToEst(time);
+            currentDateTime = ConvertUtcTimeStampToEst(time);
             var security = DataDictionary[IdSymbolDictionary[reqId - TickRequestIdBase]];
 
             security.Add(time, tickPrice);
@@ -284,6 +284,8 @@ namespace DoughBot
                 }
             }
             this.IsBotRunning = false;
+            SendText("Bot disconnected.");
+            Program.automater.Stop();
             Environment.Exit(0);
         }
 

@@ -3,6 +3,7 @@ using QuantConnect.IBAutomater;
 using System.Collections.Generic;
 using DoughBot.Strategies;
 using Telegram.Bot;
+using System.Threading.Tasks;
 namespace DoughBot
 {
     class Program
@@ -11,6 +12,7 @@ namespace DoughBot
         private static string ibUserName;
         private static string ibPassword;
         private static string ibTradingMode;
+        public static IBAutomater automater;
         
         static void Main(string[] args)
         {
@@ -32,9 +34,18 @@ namespace DoughBot
             var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary);
             bot.Run();
 
+            string shutdown;
+            while (true)
+            {
+                shutdown = Console.ReadLine();
+                if (shutdown == "shutdown")
+                { 
+                    bot.Disconnect();
+                    Console.WriteLine("Disconnecting...");
+                    break;
+                }
+            }
             Console.ReadLine();
-            Console.WriteLine("Disconnecting...");
-            bot.Disconnect();
         }
         private static void RunBacktesting()
         {
@@ -65,7 +76,7 @@ namespace DoughBot
             var ibVersion = "981";
 
             // Create a new instance of the IBAutomater class
-            var automater = new IBAutomater(ibDirectory, ibVersion, ibUserName, ibPassword, ibTradingMode, ibPort, false);
+            automater = new IBAutomater(ibDirectory, ibVersion, ibUserName, ibPassword, ibTradingMode, ibPort, false);
 
             // Attach the event handlers
             //automater.OutputDataReceived += (s, e) => Console.WriteLine($"{DateTime.UtcNow:O} {e.Data}");
