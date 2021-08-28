@@ -7,13 +7,20 @@ namespace DoughBot
 {
     class Program
     {
+        private static int ibPort;
+        private static string ibUserName;
+        private static string ibPassword;
+        private static string ibTradingMode;
+        
         static void Main(string[] args)
         {
+            ibUserName = args[0];
+            ibPassword = args[1];
+            ibTradingMode = args[2];
+
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
-                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0) },
-                { "GME", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0) },
-                { "FB", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0) }
+                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) },
             };
 
             //RunBacktesting();
@@ -22,7 +29,7 @@ namespace DoughBot
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary)
         {
             StartIbGateway();
-            var bot = new Bot(1, "127.0.0.1", 4002, watchDictionary);
+            var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary);
             bot.Run();
 
             Console.ReadLine();
@@ -43,26 +50,12 @@ namespace DoughBot
 
         private static void StartIbGateway()
         {
-            Console.Write("Username: ");
-            var ibUserName = Console.ReadLine();
-
-            Console.Write("Password: ");
-            var ibPassword = Console.ReadLine();
-
-            Console.WriteLine("Paper or Live:");
-            Console.WriteLine("\ta - paper");
-            Console.WriteLine("\tb - live");
-
-            var ibTradingMode = "paper";
-            var ibPort = 4002;
-            switch (Console.ReadLine())
+            switch (ibTradingMode)
             {
-                case "a":
-                    ibTradingMode = "paper";
+                case "paper":
                     ibPort = 4002;
                     break;
-                case "b":
-                    ibTradingMode = "live";
+                case "live":
                     ibPort = 4001;
                     break;
             }

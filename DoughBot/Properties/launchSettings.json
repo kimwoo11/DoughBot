@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DoughBot": {
+      "commandName": "Project",
+      "commandLineArgs": "aaronkim13 052621*Dough live"
+    }
+  }
+}
