@@ -284,6 +284,7 @@ namespace DoughBot
                 }
             }
             this.IsBotRunning = false;
+            Environment.Exit(0);
         }
 
         public static DateTime ConvertUtcTimeStampToEst(long unixTimeStamp)
