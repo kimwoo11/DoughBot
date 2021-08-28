@@ -267,7 +267,7 @@ namespace DoughBot
             var token = "1837108062:AAEZmsQABhAx9tN7TtbWF8kneC4Cbt7qwMY";
             var botClient = new TelegramBotClient(token);
             await botClient.SendTextMessageAsync(
-                chatId: -527802283,
+                chatId: -1001511668831,
                 text: msg
                 );
         }
