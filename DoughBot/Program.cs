@@ -12,6 +12,7 @@ namespace DoughBot
         private static string ibUserName;
         private static string ibPassword;
         private static string ibTradingMode;
+        private static string ibVersion;
         public static IBAutomater automater;
         
         static void Main(string[] args)
@@ -20,7 +21,7 @@ namespace DoughBot
             ibPassword = args[1];
             ibTradingMode = args[2];
             ibPort = Convert.ToInt32(args[3]);
-
+            ibVersion = args[4];
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
                 { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
@@ -65,7 +66,6 @@ namespace DoughBot
         {
             // IBAutomater settings
             var ibDirectory = IsLinux ? "~/Jts" : "C:\\Jts";
-            var ibVersion = "981";
 
             // Create a new instance of the IBAutomater class
             automater = new IBAutomater(ibDirectory, ibVersion, ibUserName, ibPassword, ibTradingMode, ibPort, false);
