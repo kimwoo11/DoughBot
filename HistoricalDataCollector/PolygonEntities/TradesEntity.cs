@@ -38,7 +38,7 @@ namespace HistoricalDataCollector.PolygonEntities
         [JsonProperty("e")]
         public int CorrectionIndicator { get; set; }
         [JsonProperty("i")]
-        public int TradeId { get; set; }
+        public string TradeId { get; set; }
         [JsonProperty("p")]
         public double Price { get; set; }
         [JsonProperty("r")]
