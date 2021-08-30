@@ -289,7 +289,8 @@ namespace DoughBot
             if (!isBacktest)
             {
                 Program.automater.Stop();
-                Environment.Exit(0);
+                //Environment.Exit(0);
+                Console.ReadLine();
             }
         }
 
