@@ -22,22 +22,22 @@ namespace DoughBot
 
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
-                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) },
+                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
             };
 
             //RunBacktesting();
             RunLiveTrading(watchDictionary);
         }
+
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary)
         {
             StartIbGateway();
             var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary);
             bot.Run();
 
-            string shutdown;
             while (true)
             {
-                shutdown = Console.ReadLine();
+                var shutdown = Console.ReadLine();
                 if (shutdown == "shutdown")
                 { 
                     bot.Disconnect();
@@ -49,14 +49,15 @@ namespace DoughBot
         }
         private static void RunBacktesting()
         {
-            var rrs = new List<double> { 0.0015, 0.002, 0.0025, 0.003 };
+            var rrs = new List<double> { 0.001, 0.0015 , 0.002, 0.0025, 0.003 };
 
             foreach (var rr in rrs)
             {
                 Console.WriteLine($"Starting backtesting for RR: {rr}");
                 var backtestEngine = new BacktestEngine(rr, $"{rr}_backtestResults", "2 mins");
-                backtestEngine.Run("TSLA");
+                backtestEngine.Run("MSFT");
             }
+            Console.ReadLine();
         }
 
         private static void StartIbGateway()

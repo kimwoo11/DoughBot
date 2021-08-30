@@ -6,3 +6,4 @@ backtestResults*
 *.txt
 Properties/*
 obj/
+EnvironmentVariables.cs

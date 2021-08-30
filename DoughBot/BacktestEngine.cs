@@ -30,18 +30,18 @@ namespace DoughBot
 
         public void Run(string symbol)
         {
-            var historicalTicksPath = RootFilePath + @"data\historicalTicks\";
+            var historicalTicksPath = RootFilePath + @$"data\{symbol}\historicalTicks\";
             string historicalBarsPath;
             int barOffset;
 
             if (barSize == "1 min")
             {
-                historicalBarsPath = RootFilePath + @"data\historicalBars1min\";
+                historicalBarsPath = RootFilePath + @$"data\{symbol}\historicalBars1min\";
                 barOffset = 60;
             }
             else // "2 mins"
             {
-                historicalBarsPath = RootFilePath + @"data\historicalBars\";
+                historicalBarsPath = RootFilePath + @$"data\{symbol}\historicalBars2mins\";
                 barOffset = 120;
             }
 
@@ -54,7 +54,7 @@ namespace DoughBot
             int numFiles = tickFiles.Count;
             int processed = 0;
 
-            Parallel.ForEach(tickFiles, new ParallelOptions { MaxDegreeOfParallelism = 5 }, filepath =>
+            Parallel.ForEach(tickFiles, new ParallelOptions { MaxDegreeOfParallelism = 8 }, filepath =>
             {
                 var tempBot = new Bot(0, "backtest", 0, new Dictionary<string, Strategy> { { symbol, new EmaStrictBreakout(9, 21, 50, rr, rr, rr) } });
                 tempBot.Run(true);
@@ -86,7 +86,7 @@ namespace DoughBot
                         {
                             i++;
                         }
-                        while (i < numHistoricalTicks && barTime <= historicalTicks[i].Time && historicalTicks[i].Time < nextBarTime)
+                        while (i < numHistoricalTicks && historicalTicks[i].Time < nextBarTime)
                         {
                             if (!tempBot.IsBotRunning)
                             {

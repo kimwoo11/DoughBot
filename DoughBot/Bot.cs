@@ -284,9 +284,12 @@ namespace DoughBot
                 }
             }
             this.IsBotRunning = false;
-            SendText("Bot disconnected.");
-            Program.automater.Stop();
-            Environment.Exit(0);
+            if (!isBacktest)
+            {
+                SendText("Bot disconnected.");
+                Program.automater.Stop();
+                Environment.Exit(0);
+            }
         }
 
         public static DateTime ConvertUtcTimeStampToEst(long unixTimeStamp)
