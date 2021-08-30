@@ -196,9 +196,25 @@ namespace HistoricalDataCollector
                     currentTimestamp = trade.NanoParticipantTimestamp;
                 }
                 urlParams = $"{symbol.ToUpper()}/{dateTime.ToString("yyyy-MM-dd")}?timestamp={currentTimestamp}&reverse=false&limit=50000&apiKey={EnvironmentVariables.PolygonApiKey}";
-                response = client.GetAsync(urlParams).Result;
-                responseString = response.Content.ReadAsStringAsync().Result;
-                result = JsonConvert.DeserializeObject<TradesEntity>(responseString);
+                int retryCount = 0;
+                while (retryCount <= 5)
+                {
+                    try
+                    {
+                        response = client.GetAsync(urlParams).Result;
+                        responseString = response.Content.ReadAsStringAsync().Result;
+                        result = JsonConvert.DeserializeObject<TradesEntity>(responseString);
+                        break;
+                    }
+                    catch
+                    {
+                        retryCount++;
+                    }
+                }
+                if (retryCount > 5)
+                {
+                    result = null;
+                }
             }
 
             return allTicks;

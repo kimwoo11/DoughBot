@@ -284,9 +284,10 @@ namespace DoughBot
                 }
             }
             this.IsBotRunning = false;
+            SendText("Bot disconnected.");
+            Thread.Sleep(5000);
             if (!isBacktest)
             {
-                SendText("Bot disconnected.");
                 Program.automater.Stop();
                 Environment.Exit(0);
             }

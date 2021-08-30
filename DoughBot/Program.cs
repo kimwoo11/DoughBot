@@ -25,8 +25,8 @@ namespace DoughBot
                 { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
             };
 
-            RunBacktesting();
-            //RunLiveTrading(watchDictionary);
+            //RunBacktesting();
+            RunLiveTrading(watchDictionary);
         }
 
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary)
@@ -65,7 +65,7 @@ namespace DoughBot
             switch (ibTradingMode)
             {
                 case "paper":
-                    ibPort = 4002;
+                    ibPort = 4003;
                     break;
                 case "live":
                     ibPort = 4001;
