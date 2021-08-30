@@ -19,6 +19,7 @@ namespace DoughBot
             ibUserName = args[0];
             ibPassword = args[1];
             ibTradingMode = args[2];
+            ibPort = Convert.ToInt32(args[3]);
 
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
@@ -62,16 +63,6 @@ namespace DoughBot
 
         private static void StartIbGateway()
         {
-            switch (ibTradingMode)
-            {
-                case "paper":
-                    ibPort = 4003;
-                    break;
-                case "live":
-                    ibPort = 4001;
-                    break;
-            }
-
             // IBAutomater settings
             var ibDirectory = IsLinux ? "~/Jts" : "C:\\Jts";
             var ibVersion = "981";
