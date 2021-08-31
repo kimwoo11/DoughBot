@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using QuantConnect.IBAutomater;
 using System.Collections.Generic;
 using DoughBot.Strategies;
@@ -14,14 +15,17 @@ namespace DoughBot
         private static string ibTradingMode;
         private static string ibVersion;
         public static IBAutomater automater;
-        
+        public readonly string RootFilePath;
+
         static void Main(string[] args)
         {
-            ibUserName = args[0];
-            ibPassword = args[1];
-            ibTradingMode = args[2];
-            ibPort = Convert.ToInt32(args[3]);
-            ibVersion = args[4];
+            var workingDirectory = Environment.CurrentDirectory;
+            var settings = JsonHandler.ReadFromJsonFile<Settings>(workingDirectory + "/settings.json");
+            ibUserName = settings.IbUserName;
+            ibPassword = settings.IbPassword;
+            ibTradingMode = settings.IbTradingMode;
+            ibPort = settings.IbPort;
+            ibVersion = settings.IbVersion;
 
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
@@ -30,6 +34,7 @@ namespace DoughBot
 
             //RunBacktesting();
             RunLiveTrading(watchDictionary, true);
+            Console.ReadLine();
         }
 
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary, bool sendText)

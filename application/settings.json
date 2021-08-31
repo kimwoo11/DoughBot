@@ -1,0 +1,10 @@
+{
+  "ibUserName": "username",
+  "ibPassword": "password",
+  "ibTradingMode": "live or paper",
+  "ibPort": "",
+  "ibVersion": "981",
+  "num_contracts": {
+    "TSLA": 2
+  }
+}
