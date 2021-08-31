@@ -20,7 +20,7 @@ namespace DoughBot
         static void Main(string[] args)
         {
             var workingDirectory = Environment.CurrentDirectory;
-            var settings = JsonHandler.ReadFromJsonFile<Settings>(workingDirectory + "/settings.json");
+            var settings = JsonHandler.ReadFromJsonFile<Settings>(workingDirectory + @"\settings.json");
             ibUserName = settings.IbUserName;
             ibPassword = settings.IbPassword;
             ibTradingMode = settings.IbTradingMode;
