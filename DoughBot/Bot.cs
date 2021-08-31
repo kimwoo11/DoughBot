@@ -25,6 +25,7 @@ namespace DoughBot
         private Dictionary<string, Strategy> watchDictionary;
         private DateTime currentDateTime;
         private bool isBacktest = false;
+        private bool isSendText = false;
 
         public int Id;
         public string Host;
@@ -33,12 +34,13 @@ namespace DoughBot
         public Dictionary<int, string> IdSymbolDictionary;
         public List<OrderEntry> OrderEntries = new List<OrderEntry>();
 
-        public Bot(int id, string host, int port, Dictionary<string, Strategy> watchDictionary)
+        public Bot(int id, string host, int port, Dictionary<string, Strategy> watchDictionary, bool isSendText)
         {
             Id = id;
             Host = host;
             Port = port;
             this.watchDictionary = watchDictionary;
+            this.isSendText = isSendText;
         }
 
         public void Run()
@@ -262,14 +264,17 @@ namespace DoughBot
             }
         }
         
-        public async static void SendText(string msg)
+        public async void SendText(string msg)
         {
-            var token = "1837108062:AAEZmsQABhAx9tN7TtbWF8kneC4Cbt7qwMY";
-            var botClient = new TelegramBotClient(token);
-            await botClient.SendTextMessageAsync(
-                chatId: -1001511668831,
-                text: msg
-                );
+            if (isSendText)
+            {
+                var token = "1837108062:AAEZmsQABhAx9tN7TtbWF8kneC4Cbt7qwMY";
+                var botClient = new TelegramBotClient(token);
+                await botClient.SendTextMessageAsync(
+                    chatId: -1001511668831,
+                    text: msg
+                    );
+            }
         }
 
         public void Disconnect()

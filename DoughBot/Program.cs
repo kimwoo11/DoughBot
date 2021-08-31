@@ -22,19 +22,21 @@ namespace DoughBot
             ibTradingMode = args[2];
             ibPort = Convert.ToInt32(args[3]);
             ibVersion = args[4];
+
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
                 { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
             };
 
+            var sendText = ibVersion == "981" ? true : false; 
             //RunBacktesting();
-            RunLiveTrading(watchDictionary);
+            RunLiveTrading(watchDictionary, sendText);
         }
 
-        private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary)
+        private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary, bool sendText)
         {
             StartIbGateway();
-            var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary);
+            var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary, sendText);
             bot.Run();
 
             while (true)
