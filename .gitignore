@@ -7,4 +7,4 @@ backtestResults*
 Properties/*
 obj/
 EnvironmentVariables.cs
-application/settings.json
+settings.json
