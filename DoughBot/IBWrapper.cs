@@ -38,19 +38,24 @@ namespace DoughBot
 
         public virtual void error(Exception e)
         {
-            Console.WriteLine("Exception thrown: " + e);
+            string msg = "Exception thrown: " + e;
+            bot.SendText(msg);
+
             throw e;
         }
 
         public virtual void error(string str)
         {
             Console.WriteLine("Error: " + str + "\n");
+            string msg = "Error: " + str + "\n";
+            bot.SendText(msg);
         }
 
 
         public virtual void error(int id, int errorCode, string errorMsg)
         {
-            Console.WriteLine("Error. Id: " + id + ", Code: " + errorCode + ", Msg: " + errorMsg + "\n");
+            string msg = "Error. Id: " + id + ", Code: " + errorCode + ", Msg: " + errorMsg + "\n";
+            Console.WriteLine(msg);
             if (errorCode == 10190 || errorCode == 101)
             {
                 bot.Disconnect();

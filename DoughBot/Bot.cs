@@ -151,12 +151,12 @@ namespace DoughBot
                 IbWrapper.OrderStatus.Add(IbWrapper.NextOrderId, 0.0);
                 while (IbWrapper.OrderStatus[IbWrapper.NextOrderId] > 0)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     waitCount++;
 
-                    if (waitCount >= 10)
+                    if (waitCount >= 15)
                     {
-                        SendText("Order wait count exceeded. Cancelling order and disconnecting bot.");
+                        SendText("Order wait count exceeded. Disconnecting bot. Please check to see if any positions have been bought.");
                         Disconnect();
                         break;
                     }
@@ -181,12 +181,12 @@ namespace DoughBot
                 IbWrapper.OrderStatus.Add(IbWrapper.NextOrderId, 0.0);
                 while (IbWrapper.OrderStatus[IbWrapper.NextOrderId] > 0)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     waitCount++;
 
-                    if (waitCount >= 10)
+                    if (waitCount >= 15)
                     {
-                        SendText("Order wait count exceeded. Cancelling order and disconnecting bot.");
+                        SendText("Order wait count exceeded. Disconnecting bot. Please check to see if any positions have been bought.");
                         Disconnect();
                         break;
                     }
@@ -266,15 +266,13 @@ namespace DoughBot
         
         public async void SendText(string msg)
         {
-            if (isSendText)
-            {
-                var token = "1837108062:AAEZmsQABhAx9tN7TtbWF8kneC4Cbt7qwMY";
-                var botClient = new TelegramBotClient(token);
-                await botClient.SendTextMessageAsync(
-                    chatId: -1001511668831,
-                    text: msg
-                    );
-            }
+            Console.WriteLine(msg);
+            var token = "1837108062:AAEZmsQABhAx9tN7TtbWF8kneC4Cbt7qwMY";
+            var botClient = new TelegramBotClient(token);
+            await botClient.SendTextMessageAsync(
+                chatId: -1001511668831,
+                text: msg
+                );
         }
 
         public void Disconnect()
@@ -294,8 +292,7 @@ namespace DoughBot
             if (!isBacktest)
             {
                 Program.automater.Stop();
-                //Environment.Exit(0);
-                Console.ReadLine();
+                Environment.Exit(0);
             }
         }
 

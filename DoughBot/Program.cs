@@ -29,8 +29,8 @@ namespace DoughBot
             };
 
             var sendText = ibVersion == "981" ? true : false; 
-            //RunBacktesting();
-            RunLiveTrading(watchDictionary, sendText);
+            RunBacktesting();
+            //RunLiveTrading(watchDictionary, sendText);
         }
 
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary, bool sendText)
