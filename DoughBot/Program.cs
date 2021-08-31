@@ -28,9 +28,8 @@ namespace DoughBot
                 { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
             };
 
-            var sendText = ibVersion == "981" ? true : false; 
-            RunBacktesting();
-            //RunLiveTrading(watchDictionary, sendText);
+            //RunBacktesting();
+            RunLiveTrading(watchDictionary, true);
         }
 
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary, bool sendText)
