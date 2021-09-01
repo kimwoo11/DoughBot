@@ -33,8 +33,8 @@ namespace DoughBot
                 { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
             };
 
-            //RunBacktesting();
-            RunLiveTrading(watchDictionary, true);
+            RunBacktesting();
+            //RunLiveTrading(watchDictionary, true);
             Console.ReadLine();
         }
 
@@ -58,13 +58,13 @@ namespace DoughBot
         }
         private static void RunBacktesting()
         {
-            var rrs = new List<double> { 0.001, 0.0015 , 0.002, 0.0025, 0.003 };
+            var rrs = new List<double> { 0.00075, 0.001, 0.0015 , 0.002, 0.0025};
 
             foreach (var rr in rrs)
             {
                 Console.WriteLine($"Starting backtesting for RR: {rr}");
                 var backtestEngine = new BacktestEngine(rr, $"{rr}_backtestResults", "2 mins");
-                backtestEngine.Run("AMC");
+                backtestEngine.Run("BA");
             }
             Console.ReadLine();
         }
