@@ -26,6 +26,7 @@ namespace DoughBot
         private DateTime currentDateTime;
         private bool isBacktest = false;
         private bool isSendText = false;
+        private Settings settings;
 
         public int Id;
         public string Host;
@@ -34,13 +35,13 @@ namespace DoughBot
         public Dictionary<int, string> IdSymbolDictionary;
         public List<OrderEntry> OrderEntries = new List<OrderEntry>();
 
-        public Bot(int id, string host, int port, Dictionary<string, Strategy> watchDictionary, bool isSendText)
+        public Bot(int id, string host, int port, Dictionary<string, Strategy> watchDictionary, Settings settings)
         {
             Id = id;
             Host = host;
             Port = port;
             this.watchDictionary = watchDictionary;
-            this.isSendText = isSendText;
+            this.settings = settings;
         }
 
         public void Run()
@@ -143,7 +144,7 @@ namespace DoughBot
 
             var order = new Order();
             order.Action = "BUY";
-            order.TotalQuantity = 2;
+            order.TotalQuantity = settings.NumContracts[sd.Name];
             order.OrderType = "MKT";
             if (!isBacktest)
             {
@@ -173,7 +174,7 @@ namespace DoughBot
         {
             var order = new Order();
             order.Action = "SELL";
-            order.TotalQuantity = 2;
+            order.TotalQuantity = settings.NumContracts[sd.Name];
             order.OrderType = "MKT";
             if (!isBacktest)
             {

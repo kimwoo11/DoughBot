@@ -16,11 +16,12 @@ namespace DoughBot
         private static string ibVersion;
         public static IBAutomater automater;
         public readonly string RootFilePath;
+        private static Settings settings;
 
         static void Main(string[] args)
         {
             var workingDirectory = Environment.CurrentDirectory;
-            var settings = JsonHandler.ReadFromJsonFile<Settings>(workingDirectory + @"\settings.json");
+            settings = JsonHandler.ReadFromJsonFile<Settings>(workingDirectory + @"\settings.json");
             ibUserName = settings.IbUserName;
             ibPassword = settings.IbPassword;
             ibTradingMode = settings.IbTradingMode;
@@ -29,7 +30,7 @@ namespace DoughBot
 
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
-                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
+                { "AMC", new EmaStrictBreakout(9, 21, 50, 0.01, 0.01, 0.0015) }
             };
 
             //RunBacktesting();
@@ -40,7 +41,7 @@ namespace DoughBot
         private static void RunLiveTrading(Dictionary<string, Strategy> watchDictionary, bool sendText)
         {
             StartIbGateway();
-            var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary, sendText);
+            var bot = new Bot(1, "127.0.0.1", ibPort, watchDictionary, settings);
             bot.Run();
 
             while (true)

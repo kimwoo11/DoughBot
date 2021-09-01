@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace DoughBot
 {
-    class Settings
+    public class Settings
     {
         [JsonProperty("ibUserName")]
         public string IbUserName { get; set; }
