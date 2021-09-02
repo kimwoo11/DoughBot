@@ -113,7 +113,10 @@ namespace DoughBot
                         this.Disconnect(); // only disconnect if we sell
                     }
                 }
-                this.Disconnect();
+                else
+                {
+                    this.Disconnect();
+                }
             }
             else if (ZoneAnalysis.GetZone(time) == MarketZones.MarketClose)
             {
@@ -289,10 +292,10 @@ namespace DoughBot
                 }
             }
             this.IsBotRunning = false;
-            SendText("Bot disconnected.");
-            Thread.Sleep(5000);
             if (!isBacktest)
             {
+                SendText("Bot disconnected.");
+                Thread.Sleep(5000);
                 Program.automater.Stop();
                 Environment.Exit(0);
             }
