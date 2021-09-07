@@ -23,8 +23,8 @@ namespace DoughBot
             var currTime = Bot.ConvertUtcTimeStampToEst(currentTime);
             var preMarket = currTime.Date + new TimeSpan(4, 0, 0);
             var marketOpen = currTime.Date + new TimeSpan(9, 30, 0);
-            var tradingOpen = currTime.Date + new TimeSpan(9, 36, 0);
-            var tradingClose = currTime.Date + new TimeSpan(15, 58, 0);
+            var tradingOpen = currTime.Date + new TimeSpan(9, 32, 0);
+            var tradingClose = currTime.Date + new TimeSpan(11, 0, 0);
             var marketClose = currTime.Date + new TimeSpan(15, 58, 0);
             if (currTime >= preMarket && currTime < marketOpen)
             {

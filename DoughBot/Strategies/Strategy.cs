@@ -36,7 +36,25 @@ namespace DoughBot.Strategies
         }
 
         public virtual SignalType BuySignal(SecurityData security) { return SignalType.None; }
-        public virtual SignalType SellSignal(SecurityData security) { return SignalType.None; }
+        public virtual SignalType SellSignal(SecurityData security)
+        {
+            var tickPrice = security.CurrentPrice;
+            if (security.CurrentSignal == SignalType.BuyCall)
+            {
+                if (tickPrice >= security.CurrentTakeProfit || tickPrice <= security.CurrentStopLoss)
+                {
+                    return SignalType.SellCall;
+                }
+            }
+            else if (security.CurrentSignal == SignalType.BuyPut)
+            {
+                if (tickPrice <= security.CurrentTakeProfit || tickPrice >= security.CurrentStopLoss)
+                {
+                    return SignalType.SellPut;
+                }
+            }
+            return SignalType.None;
+        }
         public virtual void Initialize() { }
     }
 }

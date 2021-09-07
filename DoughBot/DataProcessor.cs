@@ -82,6 +82,30 @@ namespace DoughBot
                     securityIndicators.Add("bullishFractals", result["bullishFractals"]);
                 }
             }
+            else if (indicator.GetType() == typeof(SuperTrend))
+            {
+                var result = indicator.Calculate(security.Bars);
+                if (securityIndicators.ContainsKey(name))
+                {
+                    securityIndicators[name] = result["superTrend"];
+                }
+                else
+                {
+                    securityIndicators.Add(name, result["superTrend"]);
+                }
+            }
+            else if (indicator.GetType() == typeof(Macd))
+            {
+                var result = indicator.Calculate(security.Bars);
+                if (securityIndicators.ContainsKey(name))
+                {
+                    securityIndicators[name] = result["histogram"];
+                }
+                else
+                {
+                    securityIndicators.Add(name, result["histogram"]);
+                }
+            }
             else
             {
                 throw new ArgumentException("Indicator currently not supported.");

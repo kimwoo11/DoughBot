@@ -54,7 +54,7 @@ namespace DoughBot
             int numFiles = tickFiles.Count;
             int processed = 0;
 
-            Parallel.ForEach(tickFiles, new ParallelOptions { MaxDegreeOfParallelism = 8 }, filepath =>
+            Parallel.ForEach(tickFiles, new ParallelOptions { MaxDegreeOfParallelism = 10 }, filepath =>
             {
                 var settings = new Settings();
                 settings.NumContracts = new Dictionary<string, int> { { symbol, 2 } };
@@ -120,7 +120,6 @@ namespace DoughBot
             csvWriter.WriteHeader<OrderEntry>();
             csvWriter.NextRecord();
             csvWriter.WriteRecords(flattenedOrderEntries);
-
             writer.Flush();
 
             // save to txt
