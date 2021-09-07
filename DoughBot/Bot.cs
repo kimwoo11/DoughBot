@@ -83,11 +83,10 @@ namespace DoughBot
 
             //Console.WriteLine($"Symbol: {security.Name}, Time: {currentDateTime}, Tick Price: {tickPrice}");
             var strategy = security.Strategy;
-            var signal = strategy.GetSignal(security);
 
             if (ZoneAnalysis.GetZone(time) == MarketZones.TradingOpen)
             {
-
+                var signal = strategy.GetSignal(security);
                 if (signal != SignalType.None)
                 {
                     if (signal == SignalType.BuyCall || signal == SignalType.BuyPut)
@@ -104,6 +103,7 @@ namespace DoughBot
             }
             else if (ZoneAnalysis.GetZone(time) == MarketZones.TradingClose)
             {
+                var signal = strategy.GetSignal(security);
                 if (security.CurrentSignal == SignalType.BuyCall || security.CurrentSignal == SignalType.BuyPut)
                 {
                     if (signal == SignalType.SellCall || signal == SignalType.SellPut)
@@ -292,10 +292,10 @@ namespace DoughBot
                 }
             }
             this.IsBotRunning = false;
-            SendText("Bot disconnected.");
-            Thread.Sleep(5000);
             if (!isBacktest)
             {
+                SendText("Bot disconnected.");
+                Thread.Sleep(5000);
                 Program.automater.Stop();
                 Environment.Exit(0);
             }

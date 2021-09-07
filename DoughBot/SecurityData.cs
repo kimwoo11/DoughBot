@@ -62,9 +62,9 @@ namespace DoughBot
                 var bullishFractal = TechnicalIndicators["bullishFractals"].Last();
                 var bearishFractal = TechnicalIndicators["bearishFractals"].Last();
                 var currentDateTime = Bot.ConvertUtcTimeStampToEst(Convert.ToInt64(CurrentBar.Time));
-                var currentTickDateTime = Bot.ConvertUtcTimeStampToEst(CurrentTime);
-                Console.WriteLine($"Bar Time: {currentDateTime}, Symbol: {Name}, Current Bullish: {bullishFractal}, Current Bearish: {bearishFractal}");
-                Console.WriteLine($"Time: {currentTickDateTime}, Symbol: {Name}, Tick Price: {CurrentPrice}");
+                //var currentTickDateTime = Bot.ConvertUtcTimeStampToEst(CurrentTime);
+                Console.WriteLine($"Time: {currentDateTime}, Symbol: {Name}, Current Bullish: {bullishFractal}, Current Bearish: {bearishFractal}, Current Low: {CurrentBar.Low}");
+                //Console.WriteLine($"Time: {currentTickDateTime}, Symbol: {Name}, Tick Price: {CurrentPrice}");
                 //Console.WriteLine($"Symbol: {Name}, Time:{ currentDateTime}");
                 CurrentBar = bar;
             }

@@ -6,8 +6,8 @@ namespace HistoricalDataCollector
     {
         static void Main(string[] args)
         {
-            HistoricalDataCollector hdc = new HistoricalDataCollector("AMC");
-            hdc.Run("2021/02/01", "2021/08/27");
+            HistoricalDataCollector hdc = new HistoricalDataCollector("TSLA");
+            hdc.Run("2021/08/27", "2021/09/03");
             //Console.ReadLine();
         }
     }

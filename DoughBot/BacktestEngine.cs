@@ -54,9 +54,11 @@ namespace DoughBot
             int numFiles = tickFiles.Count;
             int processed = 0;
 
-            Parallel.ForEach(tickFiles, new ParallelOptions { MaxDegreeOfParallelism = 8 }, filepath =>
+            Parallel.ForEach(tickFiles, new ParallelOptions { MaxDegreeOfParallelism = 10 }, filepath =>
             {
-                var tempBot = new Bot(0, "backtest", 0, new Dictionary<string, Strategy> { { symbol, new EmaStrictBreakout(9, 21, 50, rr, rr, rr) } }, null);
+                var settings = new Settings();
+                settings.NumContracts = new Dictionary<string, int> { { symbol, 2 } };
+                var tempBot = new Bot(0, "backtest", 0, new Dictionary<string, Strategy> { { symbol, new EmaStrictBreakout(9, 21, 50, rr, rr, rr) } }, settings);
                 tempBot.Run(true);
                 int barReqId = tempBot.DataDictionary[symbol].Id + tempBot.StockRequestIdBase;
                 int tickReqId = tempBot.DataDictionary[symbol].Id + tempBot.TickRequestIdBase;
@@ -118,7 +120,6 @@ namespace DoughBot
             csvWriter.WriteHeader<OrderEntry>();
             csvWriter.NextRecord();
             csvWriter.WriteRecords(flattenedOrderEntries);
-
             writer.Flush();
 
             // save to txt

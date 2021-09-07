@@ -19,25 +19,14 @@ namespace DoughBot.Indicators
             List<double> results = new List<double>();
 
             double k = 2 / (double)(lookback + 1);
-            double prevEma = -1;
+            double prevEma = closes[0];
+            results.Add(prevEma);
 
-            for (int i = 0; i < closes.Count; i++)
+            for (int i = 1; i < closes.Count; i++)
             {
-                if (i < lookback - 1)
-                {
-                    results.Add(-1);
-                }
-                else if (i == lookback - 1)
-                {
-                    prevEma = closes.GetRange(0, lookback).Sum() / lookback;
-                    results.Add(prevEma);
-                }
-                else
-                {
-                    double result = prevEma + k * (closes[i] - prevEma);
-                    prevEma = result;
-                    results.Add(result);
-                }
+                double result = prevEma + k * (closes[i] - prevEma);
+                prevEma = result;
+                results.Add(result);
             }
             return new Dictionary<string, List<double>> { { "emas", results } };
         }

@@ -15,7 +15,6 @@ namespace DoughBot
         private static string ibTradingMode;
         private static string ibVersion;
         public static IBAutomater automater;
-        public readonly string RootFilePath;
         private static Settings settings;
 
         static void Main(string[] args)
@@ -58,13 +57,13 @@ namespace DoughBot
         }
         private static void RunBacktesting()
         {
-            var rrs = new List<double> { 0.001, 0.0015 , 0.002, 0.0025, 0.003 };
+            var rrs = new List<double> {0.0015, 0.002, 0.0025};
 
             foreach (var rr in rrs)
             {
                 Console.WriteLine($"Starting backtesting for RR: {rr}");
                 var backtestEngine = new BacktestEngine(rr, $"{rr}_backtestResults", "2 mins");
-                backtestEngine.Run("AMC");
+                backtestEngine.Run("TSLA");
             }
             Console.ReadLine();
         }

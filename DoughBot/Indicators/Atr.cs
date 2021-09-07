@@ -39,7 +39,7 @@ namespace DoughBot.Indicators
                 }
 
                 double tr = Math.Max((h - l), Math.Max(highMinusPrevClose, lowMinusPrevClose));
-                double result = -1;
+                double result = 0;
 
                 if (i > lookback - 1)
                 {
