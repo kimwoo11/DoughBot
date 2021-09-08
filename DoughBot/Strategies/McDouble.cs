@@ -10,12 +10,12 @@ namespace DoughBot.Strategies
     // check for signal only at 9:32
     public class McDouble : Strategy
     {
-        private readonly double rr;
+        private readonly double rrDollar;
         private bool madeTrade = false;
 
-        public McDouble(int superTrendLookback, int superTrendMultiplier, int fastEma, int slowEma, int signal, double rr) : base()
+        public McDouble(int superTrendLookback, int superTrendMultiplier, int fastEma, int slowEma, int signal, double rrDollar) : base()
         {
-            this.rr = rr;
+            this.rrDollar = rrDollar;
             Indicators.Add(new Ema("fastEma", 9));
             Indicators.Add(new Ema("slowEma", 21));
             Indicators.Add(new Ema("trendEma", 50));
@@ -44,8 +44,8 @@ namespace DoughBot.Strategies
                 if (macd > 0 && fastEma > slowEma) //&& slowEma > trendEma)
                 {
                     security.PurchasePrice = tickPrice;
-                    security.CurrentStopLoss = tickPrice - tickPrice * rr;
-                    security.CurrentTakeProfit = tickPrice + tickPrice * rr;
+                    security.CurrentStopLoss = tickPrice - rrDollar;
+                    security.CurrentTakeProfit = tickPrice + rrDollar;
                     madeTrade = true;
                     return SignalType.BuyCall;
                 }
@@ -57,8 +57,8 @@ namespace DoughBot.Strategies
                 if (macd < 0 && fastEma < slowEma) //&& slowEma < trendEma)
                 {
                     security.PurchasePrice = tickPrice;
-                    security.CurrentStopLoss = tickPrice + tickPrice * rr;
-                    security.CurrentTakeProfit = tickPrice - tickPrice * rr;
+                    security.CurrentStopLoss = tickPrice + rrDollar;
+                    security.CurrentTakeProfit = tickPrice - rrDollar;
                     madeTrade = true;
                     return SignalType.BuyPut;
                 }

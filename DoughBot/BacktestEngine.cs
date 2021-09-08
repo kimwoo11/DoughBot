@@ -58,7 +58,7 @@ namespace DoughBot
             {
                 var settings = new Settings();
                 settings.NumContracts = new Dictionary<string, int> { { symbol, 2 } };
-                var tempBot = new Bot(0, "backtest", 0, new Dictionary<string, Strategy> { { symbol, new EmaStrictBreakout(9, 21, 50, rr, rr, rr) } }, settings);
+                var tempBot = new Bot(0, "backtest", 0, new Dictionary<string, Strategy> { { symbol, new McDouble(7, 3, 12, 26, 9, rr) } }, settings);
                 tempBot.Run(true);
                 int barReqId = tempBot.DataDictionary[symbol].Id + tempBot.StockRequestIdBase;
                 int tickReqId = tempBot.DataDictionary[symbol].Id + tempBot.TickRequestIdBase;

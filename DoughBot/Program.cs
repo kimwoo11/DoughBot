@@ -29,7 +29,7 @@ namespace DoughBot
 
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
-                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
+                { "BA", new McDouble(7, 3, 12, 26, 9, 0.5) }
             };
 
             //RunBacktesting();
@@ -57,13 +57,13 @@ namespace DoughBot
         }
         private static void RunBacktesting()
         {
-            var rrs = new List<double> {0.0015, 0.002, 0.0025};
+            var rrs = new List<double> {0.5};
 
             foreach (var rr in rrs)
             {
                 Console.WriteLine($"Starting backtesting for RR: {rr}");
                 var backtestEngine = new BacktestEngine(rr, $"{rr}_backtestResults", "2 mins");
-                backtestEngine.Run("TSLA");
+                backtestEngine.Run("BA");
             }
             Console.ReadLine();
         }
