@@ -29,7 +29,7 @@ namespace DoughBot
 
             Dictionary<string, Strategy> watchDictionary = new Dictionary<string, Strategy>
             {
-                { "TSLA", new EmaStrictBreakout(9, 21, 50, 0.0015, 0.0015, 0.0015) }
+                { "TSLA", new EmaStrictBreakout(9, 21, 50, 1.0, 1.0, 0.0015) }
             };
 
             //RunBacktesting();

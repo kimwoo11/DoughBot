@@ -39,8 +39,8 @@ namespace DoughBot.Strategies
                     {
                         security.PurchaseAtr = atr;
                         security.PurchasePrice = bearishFractal;
-                        security.CurrentStopLoss = bearishFractal - bearishFractal * risk;
-                        security.CurrentTakeProfit = bearishFractal + bearishFractal * reward;
+                        security.CurrentStopLoss = bearishFractal - risk;
+                        security.CurrentTakeProfit = bearishFractal + reward;
                         return SignalType.BuyCall;
                     }
                 }
@@ -52,8 +52,8 @@ namespace DoughBot.Strategies
                     {
                         security.PurchaseAtr = atr;
                         security.PurchasePrice = bullishFractal;
-                        security.CurrentStopLoss = bullishFractal + bullishFractal * risk;
-                        security.CurrentTakeProfit = bullishFractal - bullishFractal * reward;
+                        security.CurrentStopLoss = bullishFractal + risk;
+                        security.CurrentTakeProfit = bullishFractal - reward;
                         return SignalType.BuyPut;
                     }
                 }
